@@ -6,8 +6,9 @@
     "invalidNumber": "Hmm... that doesn't look like a valid number.",
     "chooseOperation": "What operation would you like to perform?\n1 Add 2) Subtract 3) Multiply 4) Divide",
     "chooseOperationNumber": "Must choose 1, 2, 3 or 4",
-    "doAnotherCalc": "Would you like to do another calculation?",
-    "result": "The result is: %{result}"
+    "doAnotherCalc": "Would you like to do another calculation? Please enter yes or no",
+    "result": "The result is: %{result}",
+    "invalidInput": "Invalid input. Please try again"
   },
   "fr": {
     "welcome": "Bienvenue dans Calculator!",
@@ -16,7 +17,7 @@
     "invalidNumber": "Hmm ... cela ne ressemble pas à un nombre valide.",
     "chooseOperation": "Quelle opération souhaitez-vous effectuer?  N1 Ajouter 2) Soustraire 3) Multiplier 4) Diviser",
     "chooseOperationNumber": "Doit choisir 1, 2, 3 ou 4",
-    "doAnotherCalc": "Voudriez-vous faire un autre calcul?",
-    "result": "Le résultat est: %{result}"
+    "doAnotherCalc": "Voudriez-vous faire un autre calcul? Veuillez entrer yes ou no",
+    "invalidInput": "Entrée non valide. Veuillez réessayer"
   }
 }
