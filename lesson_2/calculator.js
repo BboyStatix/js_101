@@ -31,7 +31,11 @@ while (continueCalc) {
       break;
   }
 
+  if (isFinite(output)) {
   prompt(I18n.t('result', { result: output }));
+  } else {
+    prompt(I18n.t('invalidInput'));
+  }
 
   prompt(I18n.t("doAnotherCalc"));
   const action = retrieveInput(invalidAction, I18n.t('invalidInput'))
