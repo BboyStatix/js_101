@@ -32,7 +32,7 @@ while (continueCalc) {
   }
 
   if (isFinite(output)) {
-  prompt(I18n.t('result', { result: output }));
+    prompt(I18n.t('result', { result: output }));
   } else {
     prompt(I18n.t('invalidInput'));
   }
