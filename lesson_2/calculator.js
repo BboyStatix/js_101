@@ -7,18 +7,13 @@ let continueCalc = true
 
 while (continueCalc) {
   prompt(I18n.t('firstNumber'));
-  let number1 = retrieveInput()
+  const number1 = retrieveInput(invalidNumber, I18n.t('invalidNumber'))
 
   prompt(I18n.t('secondNumber'));
-  let number2 = retrieveInput()
+  const number2 = retrieveInput(invalidNumber, I18n.t('invalidNumber'))
 
   prompt(I18n.t('chooseOperation'));
-  let operation = readline.question();
-
-  while (!['1', '2', '3', '4'].includes(operation)) {
-    prompt(I18n.t('chooseOperationNumber'));
-    operation = readline.question();
-  }
+  const operation = retrieveInput(invalidOperation, I18n.t('chooseOperationNumber'))
 
   let output;
   switch (operation) {
@@ -39,11 +34,7 @@ while (continueCalc) {
   prompt(I18n.t('result', { result: output }));
 
   prompt(I18n.t("doAnotherCalc"));
-  let action = readline.question().toLowerCase();
-  while (invalidAction(action)) {
-    prompt(I18n.t('invalidInput'))
-    action = readline.question().toLowerCase();
-  }
+  const action = retrieveInput(invalidAction, I18n.t('invalidInput'))
 
   continueCalc = action === 'yes'
 }
@@ -54,21 +45,25 @@ function prompt(message) {
   console.log(`=> ${message}`);
 }
 
-function retrieveInput() {
-  let number = readline.question();
+function retrieveInput(invalidInput, invalidInputMsg) {
+  let input = readline.question();
 
-  while (invalidNumber(number)) {
-    prompt(I18n.t('invalidNumber'));
-    number = readline.question();
+  while (invalidInput(input)) {
+    prompt(invalidInputMsg);
+    input = readline.question();
   }
 
-  return number
+  return input
 }
 
 function invalidNumber(number) {
   return number.trimStart() === '' || Number.isNaN(Number(number));
 }
 
+function invalidOperation(operation) {
+  return !['1', '2', '3', '4'].includes(operation)
+}
+
 function invalidAction(action) {
-  return !['yes', 'no'].includes(action)
+  return !['yes', 'no'].includes(action.toLowerCase())
 }
