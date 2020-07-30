@@ -40,7 +40,12 @@ while (continueCalc) {
   prompt(I18n.t("doAnotherCalc"));
   const action = retrieveInput(invalidAction, I18n.t('invalidInput'))
 
-  continueCalc = action === 'yes'
+  if (action.toLowerCase() === 'yes') {
+    continueCalc = true
+    console.clear();
+  } else {
+    continueCalc = false
+  }
 }
 
 // helper methods
