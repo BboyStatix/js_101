@@ -3,17 +3,18 @@ const I18n = require('./I18n');
 
 prompt(I18n.t('welcome'));
 
-let continueCalc = true
+let continueCalc = true;
 
 while (continueCalc) {
   prompt(I18n.t('firstNumber'));
-  const number1 = retrieveInput(invalidNumber, I18n.t('invalidNumber'))
+  const number1 = retrieveInput(invalidNumber, I18n.t('invalidNumber'));
 
   prompt(I18n.t('secondNumber'));
-  const number2 = retrieveInput(invalidNumber, I18n.t('invalidNumber'))
+  const number2 = retrieveInput(invalidNumber, I18n.t('invalidNumber'));
 
   prompt(I18n.t('chooseOperation'));
-  const operation = retrieveInput(invalidOperation, I18n.t('chooseOperationNumber'))
+  const operation = retrieveInput(invalidOperation,
+    I18n.t('chooseOperationNumber'));
 
   let output;
   switch (operation) {
@@ -38,13 +39,13 @@ while (continueCalc) {
   }
 
   prompt(I18n.t("doAnotherCalc"));
-  const action = retrieveInput(invalidAction, I18n.t('invalidInput'))
+  const action = retrieveInput(invalidAction, I18n.t('invalidInput'));
 
   if (action.toLowerCase() === 'yes') {
-    continueCalc = true
+    continueCalc = true;
     console.clear();
   } else {
-    continueCalc = false
+    continueCalc = false;
   }
 }
 
@@ -62,7 +63,7 @@ function retrieveInput(invalidInput, invalidInputMsg) {
     input = readline.question();
   }
 
-  return input
+  return input;
 }
 
 function invalidNumber(number) {
@@ -70,9 +71,9 @@ function invalidNumber(number) {
 }
 
 function invalidOperation(operation) {
-  return !['1', '2', '3', '4'].includes(operation)
+  return !['1', '2', '3', '4'].includes(operation);
 }
 
 function invalidAction(action) {
-  return !['yes', 'no'].includes(action.toLowerCase())
+  return !['yes', 'no'].includes(action.toLowerCase());
 }
