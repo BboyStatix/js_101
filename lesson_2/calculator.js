@@ -32,7 +32,7 @@ while (continueCalc) {
   if (isFinite(output)) {
     prompt(translate('result', { result: output }));
   } else {
-    prompt(translate('invalidInput'));
+    prompt(translate('cannotDivideByZero'));
   }
 
   prompt(translate("doAnotherCalc"));

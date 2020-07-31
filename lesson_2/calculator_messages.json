@@ -8,7 +8,8 @@
     "chooseOperationNumber": "Must choose 1, 2, 3 or 4",
     "doAnotherCalc": "Would you like to do another calculation? Please enter yes or no",
     "result": "The result is: %{result}",
-    "invalidInput": "Invalid input. Please try again"
+    "invalidInput": "Invalid input. Please try again",
+    "cannotDivideByZero": "Cannot divide by zero!"
   },
   "fr": {
     "welcome": "Bienvenue dans Calculator!",
@@ -19,6 +20,7 @@
     "chooseOperationNumber": "Doit choisir 1, 2, 3 ou 4",
     "doAnotherCalc": "Voudriez-vous faire un autre calcul? Veuillez entrer yes ou no",
     "result": "Le résultat est: %{result}",
-    "invalidInput": "Entrée non valide. Veuillez réessayer"
+    "invalidInput": "Entrée non valide. Veuillez réessayer",
+    "cannotDivideByZero": "Impossible de diviser par zéro!"
   }
 }
