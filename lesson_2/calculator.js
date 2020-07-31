@@ -1,45 +1,42 @@
 const readline = require('readline-sync');
-const I18n = require('./I18n');
+const MESSAGES = require('./calculator_messages.json');
 
-prompt(I18n.t('welcome'));
+const OPERATIONS = {
+  addition: 1,
+  subtraction: 2,
+  multiplication: 3,
+  division: 4
+};
+
+const LANGUAGE = 'en';
+
+prompt(translate('welcome'));
 
 let continueCalc = true;
 
 while (continueCalc) {
-  prompt(I18n.t('firstNumber'));
-  const number1 = retrieveInput(invalidNumber, I18n.t('invalidNumber'));
+  prompt(translate('firstNumber'));
+  const number1 = retrieveInput(isInvalidNumber,
+    translate('invalidNumber'));
 
-  prompt(I18n.t('secondNumber'));
-  const number2 = retrieveInput(invalidNumber, I18n.t('invalidNumber'));
+  prompt(translate('secondNumber'));
+  const number2 = retrieveInput(isInvalidNumber,
+    translate('invalidNumber'));
 
-  prompt(I18n.t('chooseOperation'));
+  prompt(translate('chooseOperation'));
   const operation = retrieveInput(invalidOperation,
-    I18n.t('chooseOperationNumber'));
+    translate('chooseOperationNumber'));
 
-  let output;
-  switch (operation) {
-    case '1':
-      output = Number(number1) + Number(number2);
-      break;
-    case '2':
-      output = Number(number1) - Number(number2);
-      break;
-    case '3':
-      output = Number(number1) * Number(number2);
-      break;
-    case '4':
-      output = Number(number1) / Number(number2);
-      break;
-  }
+  const output = calculateOutput(operation, number1, number2);
 
   if (isFinite(output)) {
-    prompt(I18n.t('result', { result: output }));
+    prompt(translate('result', { result: output }));
   } else {
-    prompt(I18n.t('invalidInput'));
+    prompt(translate('invalidInput'));
   }
 
-  prompt(I18n.t("doAnotherCalc"));
-  const action = retrieveInput(invalidAction, I18n.t('invalidInput'));
+  prompt(translate("doAnotherCalc"));
+  const action = retrieveInput(invalidAction, translate('invalidInput'));
 
   if (action.toLowerCase() === 'yes') {
     continueCalc = true;
@@ -66,7 +63,7 @@ function retrieveInput(invalidInput, invalidInputMsg) {
   return input;
 }
 
-function invalidNumber(number) {
+function isInvalidNumber(number) {
   return number.trimStart() === '' || Number.isNaN(Number(number));
 }
 
@@ -76,4 +73,33 @@ function invalidOperation(operation) {
 
 function invalidAction(action) {
   return !['yes', 'no'].includes(action.toLowerCase());
+}
+
+function calculateOutput(operation, number1, number2) {
+  let output;
+  switch (operation) {
+    case OPERATIONS.addition:
+      output = Number(number1) + Number(number2);
+      break;
+    case OPERATIONS.subtraction:
+      output = Number(number1) - Number(number2);
+      break;
+    case OPERATIONS.multiplication:
+      output = Number(number1) * Number(number2);
+      break;
+    case OPERATIONS.division:
+      output = Number(number1) / Number(number2);
+      break;
+  }
+  return output;
+}
+
+function translate() {
+  return (string, variables = {}) => {
+    let message = MESSAGES[LANGUAGE][string];
+    Object.entries(variables).forEach(([name, val]) => {
+      message = message.replace(`%{${name}}`, val);
+    });
+    return message;
+  };
 }
