@@ -94,12 +94,10 @@ function calculateOutput(operation, number1, number2) {
   return output;
 }
 
-function translate() {
-  return (string, variables = {}) => {
-    let message = MESSAGES[LANGUAGE][string];
-    Object.entries(variables).forEach(([name, val]) => {
-      message = message.replace(`%{${name}}`, val);
-    });
-    return message;
-  };
+function translate(string, variables = {}) {
+  let message = MESSAGES[LANGUAGE][string];
+  Object.entries(variables).forEach(([name, val]) => {
+    message = message.replace(`%{${name}}`, val);
+  });
+  return message;
 }
