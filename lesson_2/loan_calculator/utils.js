@@ -1,0 +1,45 @@
+const readline = require('readline-sync');
+
+const invalidNumber = (input) =>
+  input.trim().length === 0
+  || Number.isNaN(Number(input))
+  || Number(input) < 0;
+
+const invalidLoanDuration = (months) =>
+  invalidNumber(months)
+  || !Number.isInteger(Number(months))
+  || Number(months) === 0;
+
+const retrieveInput = (
+  question,
+  invalidInputMsg = 'Please enter a positive number',
+  invalidInput = invalidNumber
+) => {
+  let input = readline.question(question);
+
+  while (invalidInput(input)) {
+    console.log(invalidInputMsg);
+    input = readline.question(question);
+  }
+
+  return Number(input);
+};
+
+const calculateMonthlyPayment = (loanAmount, apr, loanDurationMonths) => {
+  const monthlyInterestRate = apr / 100 / 12;
+  const monthlyPayment =
+    loanAmount *
+    (
+      monthlyInterestRate /
+      (
+        1 - Math.pow((1 + monthlyInterestRate), (-loanDurationMonths))
+      )
+    );
+  return monthlyPayment;
+};
+
+module.exports = {
+  retrieveInput,
+  calculateMonthlyPayment,
+  invalidLoanDuration
+};
