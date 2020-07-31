@@ -27,12 +27,16 @@ while (continueCalc) {
   const operation = retrieveInput(invalidOperation,
     translate('chooseOperationNumber'));
 
-  const output = calculateOutput(operation, number1, number2);
-
-  if (isFinite(output)) {
-    prompt(translate('result', { result: output }));
-  } else {
+  if (operation === OPERATIONS.division && number2 === '0') {
     prompt(translate('cannotDivideByZero'));
+  } else {
+    const output = calculateOutput(operation, number1, number2);
+
+    if (isFinite(output)) {
+      prompt(translate('result', { result: output }));
+    } else {
+      prompt(translate('invalidNumber'));
+    }
   }
 
   prompt(translate("doAnotherCalc"));
@@ -68,6 +72,9 @@ function isInvalidNumber(number) {
 }
 
 function invalidOperation(operation) {
+    if(operation === OPERATIONS.division) {
+
+    }
   return !['1', '2', '3', '4'].includes(operation);
 }
 
