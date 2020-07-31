@@ -2,10 +2,10 @@ const readline = require('readline-sync');
 const MESSAGES = require('./calculator_messages.json');
 
 const OPERATIONS = {
-  addition: 1,
-  subtraction: 2,
-  multiplication: 3,
-  division: 4
+  addition: '1',
+  subtraction: '2',
+  multiplication: '3',
+  division: '4'
 };
 
 const LANGUAGE = 'en';
