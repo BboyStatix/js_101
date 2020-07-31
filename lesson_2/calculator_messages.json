@@ -18,6 +18,7 @@
     "chooseOperation": "Quelle opération souhaitez-vous effectuer?  N1 Ajouter 2) Soustraire 3) Multiplier 4) Diviser",
     "chooseOperationNumber": "Doit choisir 1, 2, 3 ou 4",
     "doAnotherCalc": "Voudriez-vous faire un autre calcul? Veuillez entrer yes ou no",
+    "result": "Le résultat est: %{result}",
     "invalidInput": "Entrée non valide. Veuillez réessayer"
   }
 }
