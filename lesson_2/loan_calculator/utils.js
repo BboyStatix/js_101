@@ -27,15 +27,12 @@ const retrieveInput = (
 
 const calculateMonthlyPayment = (loanAmount, apr, loanDurationMonths) => {
   const monthlyInterestRate = apr / 100 / 12;
-  const monthlyPayment =
-    loanAmount *
-    (
-      monthlyInterestRate /
+  return loanAmount *
+    (monthlyInterestRate /
       (
         1 - Math.pow((1 + monthlyInterestRate), (-loanDurationMonths))
       )
     );
-  return monthlyPayment;
 };
 
 module.exports = {
