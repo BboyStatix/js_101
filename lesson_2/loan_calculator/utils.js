@@ -5,6 +5,10 @@ const invalidNumber = (input) =>
   || Number.isNaN(Number(input))
   || Number(input) < 0;
 
+const invalidLoanAmount = (amount) =>
+  invalidNumber(amount)
+  || Number(amount) === 0;
+
 const invalidLoanDuration = (months) =>
   invalidNumber(months)
   || !Number.isInteger(Number(months))
@@ -39,5 +43,6 @@ const calculateMonthlyPayment = (loanAmount, apr, loanDurationMonths) => {
 module.exports = {
   retrieveInput,
   calculateMonthlyPayment,
+  invalidLoanAmount,
   invalidLoanDuration
 };
