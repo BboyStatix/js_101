@@ -26,7 +26,8 @@ const retrieveInput = (
 };
 
 const calculateMonthlyPayment = (loanAmount, apr, loanDurationMonths) => {
-  const monthlyInterestRate = apr / 100 / 12;
+  const monthlyInterestRate = Number(apr) / 100 / 12;
+  if (monthlyInterestRate === 0) return loanAmount / loanDurationMonths;
   return loanAmount *
     (monthlyInterestRate /
       (
