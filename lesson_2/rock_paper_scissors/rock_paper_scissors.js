@@ -45,6 +45,7 @@ function getChoice() {
   prompt(`Choose one: ${[...VALID_CHOICES]}. You don't have to type the entire word`);
   while (true) {
     let input = readline.question();
+    input = input.toLowerCase();
     const validChoices = VALID_CHOICES.filter(validChoice => {
       const regExp = new RegExp(`^${input}`);
       return regExp.test(validChoice);
