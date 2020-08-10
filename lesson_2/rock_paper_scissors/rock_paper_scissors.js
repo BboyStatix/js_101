@@ -102,8 +102,8 @@ while (playing) {
 
   const choice = getChoice();
   const computerChoice = getComputerChoice();
-
   prompt(`You chose ${choice}, computer chose ${computerChoice}`);
+
   const winner = getWinner(choice, computerChoice);
   displayWinner(winner);
   updateScore(score, winner);
