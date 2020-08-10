@@ -69,8 +69,8 @@ function getWinner(choice, computerChoice) {
   }
 }
 
-function incrementWinCount(score, winner) {
-  score[winner] += 1;
+function updateScore(score, winner) {
+  if (winner) score[winner] += 1;
 }
 
 function isGameEnded(score) {
@@ -106,7 +106,7 @@ while (playing) {
   prompt(`You chose ${choice}, computer chose ${computerChoice}`);
   const winner = getWinner(choice, computerChoice);
   displayWinner(winner);
-  incrementWinCount(score, winner);
+  updateScore(score, winner);
 
   if (isGameEnded(score)) {
     displayGrandWinner(winner);
