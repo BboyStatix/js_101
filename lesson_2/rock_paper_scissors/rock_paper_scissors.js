@@ -114,6 +114,7 @@ while (playing) {
     const answer = readline.question();
     if (answer.toLowerCase() === 'yes') {
       resetScores(score);
+      console.clear();
     } else {
       playing = false;
     }
