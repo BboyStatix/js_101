@@ -54,10 +54,12 @@ function getChoice() {
     const validChoices = VALID_CHOICES.filter(validChoice =>
       validateMoveInput(input, validChoice));
 
-    if (validChoices.length === 1) {
+    if (validChoices.length === 0) {
+      prompt('Invalid choice. Please try again');
+    } else if (validChoices.length === 1) {
       return validChoices[0];
     } else {
-      prompt('Invalid choice. Please try again');
+      prompt(`I am not sure if you meant scissors or spock. Can you please type first two letters?`);
     }
   }
 }
