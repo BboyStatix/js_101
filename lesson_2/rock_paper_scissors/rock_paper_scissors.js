@@ -95,6 +95,25 @@ function getComputerChoice() {
   return VALID_CHOICES[randomIdx];
 }
 
+function validAnswer(answer) {
+  return (answer === 'y'
+      || answer === 'yes'
+      || answer === 'n'
+      || answer === 'no'
+  );
+}
+
+function retrieveAnswer() {
+  prompt('Continue playing? y or yes to continue, n or no to exit');
+  let answer = readline.question();
+  answer = answer.toLowerCase();
+  while (!validAnswer(answer)) {
+    prompt('Invalid input. Please try again.');
+    answer = readline.question();
+  }
+  return answer;
+}
+
 let playing = true;
 const score = {[PLAYER]: 0, [COMPUTER]: 0};
 prompt(`First to player to win ${TARGET_WINS} rounds wins`);
@@ -111,9 +130,9 @@ while (playing) {
 
   if (isGameEnded(score)) {
     displayGrandWinner(winner);
-    console.log('Continue playing? yes to continue or any other key to exit');
-    const answer = readline.question();
-    if (answer.toLowerCase() === 'yes') {
+
+    const answer = retrieveAnswer();
+    if (answer === 'y' || answer === 'yes') {
       resetScores(score);
       console.clear();
     } else {
