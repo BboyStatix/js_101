@@ -34,7 +34,7 @@ function displayWinner(winner) {
 }
 
 function displayScore(score) {
-  console.log(`Your wins: ${score[PLAYER]}. Computer wins: ${score[COMPUTER]}`);
+  prompt(`Your wins: ${score[PLAYER]}. Computer wins: ${score[COMPUTER]}`);
 }
 
 function prompt(message) {
