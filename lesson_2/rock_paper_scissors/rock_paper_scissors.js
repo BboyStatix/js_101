@@ -97,6 +97,7 @@ function getComputerChoice() {
 
 let playing = true;
 const score = {[PLAYER]: 0, [COMPUTER]: 0};
+prompt(`First to player to win ${TARGET_WINS} rounds wins`);
 while (playing) {
   displayScore(score);
 
