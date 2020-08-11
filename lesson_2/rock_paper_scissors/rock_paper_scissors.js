@@ -41,15 +41,18 @@ function prompt(message) {
   console.log(`=> ${message}`);
 }
 
+function validateMoveInput(input, validChoice) {
+  const regExp = new RegExp(`^${input}`);
+  return regExp.test(validChoice);
+}
+
 function getChoice() {
   prompt(`Choose one: ${[...VALID_CHOICES]}. You don't have to type the entire word`);
   while (true) {
     let input = readline.question();
     input = input.toLowerCase();
-    const validChoices = VALID_CHOICES.filter(validChoice => {
-      const regExp = new RegExp(`^${input}`);
-      return regExp.test(validChoice);
-    });
+    const validChoices = VALID_CHOICES.filter(validChoice =>
+      validateMoveInput(input, validChoice));
 
     if (validChoices.length === 1) {
       return validChoices[0];
