@@ -42,8 +42,7 @@ function prompt(message) {
 }
 
 function validateMoveInput(input, validChoice) {
-  const regExp = new RegExp(`^${input}`);
-  return regExp.test(validChoice);
+  return validChoice.startsWith(input);
 }
 
 function getChoice() {
