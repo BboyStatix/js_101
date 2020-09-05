@@ -24,13 +24,8 @@ function joinOr(numbers, delimiter = ', ', joiningWord = 'or') {
 
 function retrieveAnswer() {
   while (true) {
-    const answer = readline.question();
-    if (
-      answer.toLowerCase() === 'y' ||
-      answer.toLowerCase() === 'n'
-    ) {
-      return answer;
-    }
+    const answer = readline.question().trim().toLowerCase();
+    if (answer === 'y' || answer === 'n') return answer;
 
     prompt(messages.invalidInput);
   }

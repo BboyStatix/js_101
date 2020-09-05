@@ -62,14 +62,14 @@ while (true) {
     prompt(messages.playAgain);
     const answer = retrieveAnswer();
 
-    if (answer.toLowerCase() === 'n') break;
+    if (answer === 'n') break;
 
     resetScore(SCORE);
   } else {
     prompt(messages.nextRound);
     const answer = retrieveAnswer();
 
-    if (answer.toLowerCase() === 'n') break;
+    if (answer === 'n') break;
   }
 }
 
