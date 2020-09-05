@@ -1,0 +1,12 @@
+{
+  "whoStartsFirst": "Who starts first? Player or Computer?",
+  "winsThisRound": "wins this round!",
+  "tie": "It's a tie!",
+  "winsFullGame": "wins the full game!",
+  "playAgain": "Would you like to play again? y/Y or n/N",
+  "nextRound": "Next round? y/Y or n/N",
+  "chooseSquare": "Choose a square",
+  "notValidChoice": "Sorry, that's not a valid choice.",
+  "invalidInput": "Invalid input. Please try again",
+  "invalidChoice": "Invalid choice. Please try again"
+}
