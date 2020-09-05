@@ -16,6 +16,7 @@ const {
   chooseSquare,
   someoneWon,
   detectWinner,
+  alternatePlayer,
   detectFullGameWinner,
 } = require("./utils");
 const messages = require('./messages.json');
@@ -27,21 +28,18 @@ if (STARTING_PLAYER === CHOOSE) {
 }
 
 const SCORE = { [PLAYER]: 0, [COMPUTER]: 0 };
+
 while (true) {
   const board = initializeBoard();
+  let currentPlayer = startingPlayer;
   while (true) {
     displayBoard(board);
     displayScore(SCORE);
 
-    chooseSquare(startingPlayer, board);
+    chooseSquare(currentPlayer, board);
     if (someoneWon(board) || boardFull(board)) break;
-    displayBoard(board);
 
-    const nextPlayer = startingPlayer === PLAYER ?
-      COMPUTER : PLAYER;
-
-    chooseSquare(nextPlayer, board);
-    if (someoneWon(board) || boardFull(board)) break;
+    currentPlayer = alternatePlayer(currentPlayer);
   }
   displayBoard(board);
 

@@ -136,12 +136,8 @@ function computerChoosesSquare(board) {
   }
 }
 
-function isLineUnderThreat(winningLine, board) {
-  const playerSquares = winningLine.filter(
-    square => board[square] === HUMAN_MARKER
-  );
-  return playerSquares.length === 2
-    && !winningLine.includes(COMPUTER_MARKER);
+function alternatePlayer(currentPlayer) {
+  return currentPlayer === PLAYER ? COMPUTER : PLAYER;
 }
 
 function getThreateningSquare(board, benefactorSymbol = HUMAN_MARKER) {
@@ -185,7 +181,6 @@ function detectFullGameWinner(score) {
 
 module.exports = {
   prompt,
-  joinOr,
   retrieveAnswer,
   retrieveStartingPlayerChoice,
   initializeBoard,
@@ -193,13 +188,9 @@ module.exports = {
   boardFull,
   displayScore,
   resetScore,
-  emptySquares,
   chooseSquare,
-  playerChoosesSquare,
-  computerChoosesSquare,
-  isLineUnderThreat,
-  getThreateningSquare,
   someoneWon,
   detectWinner,
-  detectFullGameWinner
+  detectFullGameWinner,
+  alternatePlayer
 };
