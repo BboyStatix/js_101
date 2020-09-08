@@ -131,23 +131,6 @@ function computerChoosesSquare(board) {
   }
 
   board[square] = COMPUTER_MARKER
-
-  // if (square) {
-  //   board[square] = COMPUTER_MARKER;
-  // } else {
-  //   const threateningSquare = getThreateningSquare(board);
-  //   if (threateningSquare) {
-  //     board[threateningSquare] = COMPUTER_MARKER;
-  //   } else if (board[5] === INITIAL_MARKER) {
-  //     board[5] = COMPUTER_MARKER;
-  //   } else {
-  //     const randomIndex =
-  //       Math.floor(Math.random() * emptySquares(board).length);
-
-  //     const square = emptySquares(board)[randomIndex];
-  //     board[square] = COMPUTER_MARKER;
-  //   }
-  // }
 }
 
 function alternatePlayer(currentPlayer) {
