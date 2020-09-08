@@ -27,34 +27,35 @@ if (STARTING_PLAYER === CHOOSE) {
   startingPlayer = retrieveStartingPlayerChoice();
 }
 
-const SCORE = { [PLAYER]: 0, [COMPUTER]: 0 };
+const score = { [PLAYER]: 0, [COMPUTER]: 0 };
 
 while (true) {
   const board = initializeBoard();
   let currentPlayer = startingPlayer;
+  let winner = null
   while (true) {
     displayBoard(board);
-    displayScore(SCORE);
+    displayScore(score);
 
     chooseSquare(currentPlayer, board);
-    if (someoneWon(board) || boardFull(board)) break;
+    winner = detectWinner(board)
+    if (someoneWon(winner) || boardFull(board)) break;
 
     currentPlayer = alternatePlayer(currentPlayer);
   }
   displayBoard(board);
 
-  if (someoneWon(board)) {
-    const winner = detectWinner(board);
+  if (someoneWon(winner)) {
     prompt(`${winner} ${messages.winsThisRound}`);
 
-    SCORE[winner] += 1;
+    score[winner] += 1;
   } else {
     prompt(messages.tie);
   }
 
-  displayScore(SCORE);
+  displayScore(score);
 
-  const fullGameWinner = detectFullGameWinner(SCORE);
+  const fullGameWinner = detectFullGameWinner(score);
 
   if (fullGameWinner) {
     prompt(`${fullGameWinner} ${messages.winsFullGame}`);
@@ -64,7 +65,7 @@ while (true) {
 
     if (answer === 'n') break;
 
-    resetScore(SCORE);
+    resetScore(score);
   } else {
     prompt(messages.nextRound);
     const answer = retrieveAnswer();

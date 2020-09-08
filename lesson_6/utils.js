@@ -35,6 +35,8 @@ function retrieveStartingPlayerChoice() {
   while (true) {
     const choice = readline.question().trim().toLowerCase();
     if ([PLAYER, COMPUTER].includes(choice)) return choice;
+    if (choice === 'p') return PLAYER
+    if (choice === 'c') return COMPUTER
 
     prompt(messages.invalidChoice);
   }
@@ -112,23 +114,40 @@ function playerChoosesSquare(board) {
 }
 
 function computerChoosesSquare(board) {
-  const offensiveSquare = getThreateningSquare(board, COMPUTER_MARKER);
-  if (offensiveSquare) {
-    board[offensiveSquare] = COMPUTER_MARKER;
-  } else {
-    const threateningSquare = getThreateningSquare(board);
-    if (threateningSquare) {
-      board[threateningSquare] = COMPUTER_MARKER;
-    } else if (board[5] === INITIAL_MARKER) {
-      board[5] = COMPUTER_MARKER;
-    } else {
-      const randomIndex =
-        Math.floor(Math.random() * emptySquares(board).length);
+  let square = getThreateningSquare(board, COMPUTER_MARKER);
 
-      const square = emptySquares(board)[randomIndex];
-      board[square] = COMPUTER_MARKER;
-    }
+  if (!square) {
+    square = getThreateningSquare(board)
   }
+
+  if (!square && board[5] === INITIAL_MARKER) {
+    square = 5
+  }
+
+  if (!square) {
+    const randomIndex =
+      Math.floor(Math.random() * emptySquares(board).length);
+    square = emptySquares(board)[randomIndex];
+  }
+
+  board[square] = COMPUTER_MARKER
+
+  // if (square) {
+  //   board[square] = COMPUTER_MARKER;
+  // } else {
+  //   const threateningSquare = getThreateningSquare(board);
+  //   if (threateningSquare) {
+  //     board[threateningSquare] = COMPUTER_MARKER;
+  //   } else if (board[5] === INITIAL_MARKER) {
+  //     board[5] = COMPUTER_MARKER;
+  //   } else {
+  //     const randomIndex =
+  //       Math.floor(Math.random() * emptySquares(board).length);
+
+  //     const square = emptySquares(board)[randomIndex];
+  //     board[square] = COMPUTER_MARKER;
+  //   }
+  // }
 }
 
 function alternatePlayer(currentPlayer) {
@@ -148,8 +167,8 @@ function getThreateningSquare(board, benefactorSymbol = HUMAN_MARKER) {
   return null;
 }
 
-function someoneWon(board) {
-  return Boolean(detectWinner(board));
+function someoneWon(winner) {
+  return Boolean(winner);
 }
 
 function detectWinner(board) {
