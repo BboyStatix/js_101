@@ -4,6 +4,7 @@
   "description": "",
   "main": "tictactoe.js",
   "dependencies": {
+    "jest": "^26.4.2",
     "readline-sync": "^1.4.10"
   },
   "devDependencies": {
@@ -12,7 +13,7 @@
     "eslint-cli": "^1.1.1"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "author": "Naveed Elahi",
   "license": "ISC"
