@@ -1,0 +1,11 @@
+{
+  "welcome": "Welcome to Twenty One!",
+  "hitOrStay": "Would you like to hit or stay?",
+  "invalidInput": "Invalid input, please try again",
+  "playerWins": "Player wins!",
+  "dealerWins": "Dealer wins!",
+  "playerBusted": "You busted!",
+  "dealerBusted": "Dealer busted",
+  "tie": "It's a tie!",
+  "playAgain": "Play again? (y/n)"
+}
