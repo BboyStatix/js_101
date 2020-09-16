@@ -85,9 +85,9 @@ function totalCardsValue(cards) {
 }
 
 function grandWinner(score) {
-  if (score.player === TARGET_WINS) return 'player'
-  if (score.dealer === TARGET_WINS) return 'dealer'
-  return null
+  if (score.player === TARGET_WINS) return 'player';
+  if (score.dealer === TARGET_WINS) return 'dealer';
+  return null;
 }
 
 module.exports = {

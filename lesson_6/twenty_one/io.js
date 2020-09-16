@@ -6,8 +6,8 @@ const { TARGET_WINS } = require('./constants');
 
 function displayWelcome() {
   prompt(messages.welcome);
-  prompt(messages.winningRule.replace('%{targetWins}', TARGET_WINS))
-  console.log()
+  prompt(messages.winningRule.replace('%{targetWins}', TARGET_WINS));
+  console.log();
 }
 
 function retrieveHitOrStay() {
@@ -50,11 +50,11 @@ function displayPlayersCards(playerCards, dealerCards) {
 }
 
 function displayScore(score) {
-  prompt(`Score: Player: ${score.player}, Dealer: ${score.dealer}`)
+  prompt(`Score: Player: ${score.player}, Dealer: ${score.dealer}`);
 }
 
 function displayGrandWinner(grandWinner) {
-  prompt(`${grandWinner} is the grand winner!`)
+  prompt(`${grandWinner} is the grand winner!`);
 }
 
 function continueToNextRound() {
@@ -62,9 +62,9 @@ function continueToNextRound() {
     const response = readline
       .question(messages.continueToNextRound)
       .trim()
-      .toLowerCase()
-    if (response === 'y') return true
-    prompt(messages.invalidInput)
+      .toLowerCase();
+    if (response === 'y') return true;
+    prompt(messages.invalidInput);
   }
 }
 

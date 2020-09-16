@@ -1,4 +1,4 @@
-const TARGET_WINS = 2
+const TARGET_WINS = 2;
 const TARGET_SCORE = 21;
 const DEALER_HIT_UNTIL_TARGET = 17;
 

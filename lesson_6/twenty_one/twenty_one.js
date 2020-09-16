@@ -1,4 +1,4 @@
-const { DEALER_HIT_UNTIL_TARGET, TARGET_WINS } = require("./constants");
+const { DEALER_HIT_UNTIL_TARGET } = require("./constants");
 const messages = require('./messages.json');
 const { prompt } = require('./utils');
 const {
@@ -25,8 +25,8 @@ const {
 
 
 while (true) {
-  const score = { player: 0, dealer: 0 }
-  displayWelcome()
+  const score = { player: 0, dealer: 0 };
+  displayWelcome();
   while (true) {
     console.clear();
 
@@ -35,7 +35,7 @@ while (true) {
     const deckOfCards = getShuffledCards();
     distributeCards(deckOfCards, playerCards, dealerCards);
 
-    displayScore(score)
+    displayScore(score);
     prompt(`Dealer has ${dealerCards[0][1]} and unknown card`);
     prompt(`You have ${playerCards[0][1]} and ${playerCards[1][1]} for a total of ${totalCardsValue(playerCards)}`);
 
@@ -50,11 +50,11 @@ while (true) {
     }
 
     if (busted(playerCards)) {
-      displayPlayersCards(playerCards, dealerCards)
+      displayPlayersCards(playerCards, dealerCards);
       prompt(`${messages.playerBusted} ${messages.dealerWins}`);
-      score.dealer += 1
-      if (grandWinner(score)) break
-      if (continueToNextRound()) continue
+      score.dealer += 1;
+      if (grandWinner(score)) break;
+      if (continueToNextRound()) continue;
     }
 
     while (totalCardsValue(dealerCards) < DEALER_HIT_UNTIL_TARGET
@@ -66,24 +66,24 @@ while (true) {
     );
 
     if (busted(dealerCards)) {
-      displayPlayersCards(playerCards, dealerCards)
+      displayPlayersCards(playerCards, dealerCards);
       prompt(`${messages.dealerBusted} ${messages.playerWins}`);
-      score.player += 1
-      if (grandWinner(score)) break
-      if (continueToNextRound()) continue
+      score.player += 1;
+      if (grandWinner(score)) break;
+      if (continueToNextRound()) continue;
     }
 
-    displayPlayersCards(playerCards, dealerCards)
+    displayPlayersCards(playerCards, dealerCards);
     const winner = getWinner(playerCards, dealerCards);
-    if (winner) score[winner] += 1
+    if (winner) score[winner] += 1;
     displayWinner(winner);
 
-    if (grandWinner(score)) break
-    if (continueToNextRound()) continue
+    if (grandWinner(score)) break;
+    if (continueToNextRound()) continue;
   }
 
-  displayGrandWinner(grandWinner(score))
+  displayGrandWinner(grandWinner(score));
 
-  displayPlayAgain()
-  if (!playAgain()) break
+  displayPlayAgain();
+  if (!playAgain()) break;
 }
