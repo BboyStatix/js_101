@@ -1,12 +1,17 @@
-const { DEALER_HIT_UNTIL_TARGET } = require("./constants");
+const { DEALER_HIT_UNTIL_TARGET, TARGET_WINS } = require("./constants");
 const messages = require('./messages.json');
+const { prompt } = require('./utils');
 const {
-  prompt,
   retrieveHitOrStay,
   displayWinner,
   displayPlayAgain,
-  playAgain
-} = require('./utils/io');
+  playAgain,
+  displayPlayersCards,
+  displayWelcome,
+  displayScore,
+  displayGrandWinner,
+  continueToNextRound
+} = require('./io');
 const {
   getShuffledCards,
   distributeCards,
@@ -14,68 +19,71 @@ const {
   busted,
   getWinner,
   cardFaces,
-  totalCardsValue
-} = require('./utils/game');
+  totalCardsValue,
+  grandWinner
+} = require('./gameLogic');
 
 
 while (true) {
-  console.clear();
-
-  const playerCards = [];
-  const dealerCards = [];
-  const deckOfCards = getShuffledCards();
-  distributeCards(deckOfCards, playerCards, dealerCards);
-
-  prompt(messages.welcome);
-  prompt(`Dealer has ${dealerCards[0][1]} and unknown card`);
-  prompt(`You have ${playerCards[0][1]} and ${playerCards[1][1]} for a total of ${totalCardsValue(playerCards)}`);
-
+  const score = { player: 0, dealer: 0 }
+  displayWelcome()
   while (true) {
-    const hitOrStayResponse = retrieveHitOrStay();
-    if (hitOrStayResponse === 'stay') break;
+    console.clear();
 
-    drawCard(deckOfCards, playerCards);
-    prompt(`You now have ${cardFaces(playerCards)} for a total of ${totalCardsValue(playerCards)}`);
+    const playerCards = [];
+    const dealerCards = [];
+    const deckOfCards = getShuffledCards();
+    distributeCards(deckOfCards, playerCards, dealerCards);
 
-    if (busted(playerCards)) break;
-  }
+    displayScore(score)
+    prompt(`Dealer has ${dealerCards[0][1]} and unknown card`);
+    prompt(`You have ${playerCards[0][1]} and ${playerCards[1][1]} for a total of ${totalCardsValue(playerCards)}`);
 
-  if (busted(playerCards)) {
-    prompt(`${messages.playerBusted} ${messages.dealerWins}`);
+    while (true) {
+      const hitOrStayResponse = retrieveHitOrStay();
+      if (hitOrStayResponse[0] === 's') break;
 
-    displayPlayAgain();
-    if (playAgain()) {
-      continue;
-    } else {
-      break;
+      drawCard(deckOfCards, playerCards);
+      prompt(`You now have ${cardFaces(playerCards)} for a total of ${totalCardsValue(playerCards)}`);
+
+      if (busted(playerCards)) break;
     }
-  }
 
-  while (totalCardsValue(dealerCards) < DEALER_HIT_UNTIL_TARGET
-    && !busted(dealerCards)) {
-    drawCard(deckOfCards, dealerCards);
-  }
-  prompt(`Dealer's cards: ${cardFaces(dealerCards)} ` +
-    `for a total of ${totalCardsValue(dealerCards)}`
-  );
-
-  if (busted(dealerCards)) {
-    prompt(`${messages.dealerBusted} ${messages.playerWins}`);
-
-    displayPlayAgain();
-    if (playAgain()) {
-      continue;
-    } else {
-      break;
+    if (busted(playerCards)) {
+      displayPlayersCards(playerCards, dealerCards)
+      prompt(`${messages.playerBusted} ${messages.dealerWins}`);
+      score.dealer += 1
+      if (grandWinner(score)) break
+      if (continueToNextRound()) continue
     }
+
+    while (totalCardsValue(dealerCards) < DEALER_HIT_UNTIL_TARGET
+      && !busted(dealerCards)) {
+      drawCard(deckOfCards, dealerCards);
+    }
+    prompt(`Dealer's cards: ${cardFaces(dealerCards)} ` +
+      `for a total of ${totalCardsValue(dealerCards)}`
+    );
+
+    if (busted(dealerCards)) {
+      displayPlayersCards(playerCards, dealerCards)
+      prompt(`${messages.dealerBusted} ${messages.playerWins}`);
+      score.player += 1
+      if (grandWinner(score)) break
+      if (continueToNextRound()) continue
+    }
+
+    displayPlayersCards(playerCards, dealerCards)
+    const winner = getWinner(playerCards, dealerCards);
+    if (winner) score[winner] += 1
+    displayWinner(winner);
+
+    if (grandWinner(score)) break
+    if (continueToNextRound()) continue
   }
 
-  console.log('===========');
-  prompt(`Player has ${playerCards} for a total of ${totalCardsValue(playerCards)}`);
-  prompt(`Dealer has ${dealerCards} for a total of ${totalCardsValue(dealerCards)}`);
-  console.log('===========');
-  displayWinner(getWinner(playerCards, dealerCards));
+  displayGrandWinner(grandWinner(score))
 
-  displayPlayAgain();
-  if (!playAgain()) break;
+  displayPlayAgain()
+  if (!playAgain()) break
 }

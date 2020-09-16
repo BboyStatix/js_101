@@ -1,11 +1,13 @@
 {
   "welcome": "Welcome to Twenty One!",
-  "hitOrStay": "Would you like to hit or stay?",
+  "winningRule": "First to %{targetWins} wins!",
+  "hitOrStay": "Would you like to (h)it or (s)tay?",
   "invalidInput": "Invalid input, please try again",
   "playerWins": "Player wins!",
   "dealerWins": "Dealer wins!",
   "playerBusted": "You busted!",
   "dealerBusted": "Dealer busted",
   "tie": "It's a tie!",
-  "playAgain": "Play again? (y/n)"
+  "playAgain": "Play again? (y/n)",
+  "continueToNextRound": "Press y to continue to the next round: "
 }

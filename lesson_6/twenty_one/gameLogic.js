@@ -3,8 +3,9 @@ const {
   TARGET_SCORE,
   CARD_FACES,
   ACE_VALUE,
-  FACE_CARD_VALUE
-} = require("../constants");
+  FACE_CARD_VALUE,
+  TARGET_WINS
+} = require("./constants");
 const { deepClone } = require('./utils');
 const { JACK, QUEEN, KING, ACE } = CARD_FACES;
 
@@ -25,7 +26,7 @@ function getShuffledCards() {
 
 /*
 1. how to make this w/o pass by ref?
-and enforce command query separation?
+whilst still enforcing command query separation?
 
 2. cards.pop() twice seems like we can create a function
 for it? What if in future we need to distribute n cards?
@@ -48,8 +49,8 @@ function getWinner(playerCards, dealerCards) {
   const playerTotal = totalCardsValue(playerCards);
   const dealerTotal = totalCardsValue(dealerCards);
 
-  if (playerTotal > dealerTotal) return 'Player';
-  if (playerTotal < dealerTotal) return 'Dealer';
+  if (playerTotal > dealerTotal) return 'player';
+  if (playerTotal < dealerTotal) return 'dealer';
   return null;
 }
 
@@ -80,12 +81,21 @@ function totalCardsValue(cards) {
 
   if (headCard[1] === ACE) {
     const remainingCardsValue = minimum(tail);
-    const aceValue = ACE_VALUE.MAX + remainingCardsValue <= TARGET_SCORE
-      ? ACE_VALUE.MAX : ACE_VALUE.MIN;
+    const aceValue =
+      ACE_VALUE.MAX + remainingCardsValue <= TARGET_SCORE ?
+        ACE_VALUE.MAX
+        :
+        ACE_VALUE.MIN;
     return aceValue + remainingCardsValue;
   }
 
   return minimum(sortedCards);
+}
+
+function grandWinner(score) {
+  if (score.player === TARGET_WINS) return 'player'
+  if (score.dealer === TARGET_WINS) return 'dealer'
+  return null
 }
 
 module.exports = {
@@ -95,5 +105,6 @@ module.exports = {
   busted,
   getWinner,
   cardFaces,
-  totalCardsValue
+  totalCardsValue,
+  grandWinner
 };
