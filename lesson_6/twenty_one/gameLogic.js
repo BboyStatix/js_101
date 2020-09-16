@@ -24,14 +24,6 @@ function getShuffledCards() {
   return shuffledCards;
 }
 
-/*
-1. how to make this w/o pass by ref?
-whilst still enforcing command query separation?
-
-2. cards.pop() twice seems like we can create a function
-for it? What if in future we need to distribute n cards?
-Is this function easily extendable?
- */
 function distributeCards(cards, playerCards, dealerCards) {
   playerCards.push(cards.pop(), cards.pop());
   dealerCards.push(cards.pop(), cards.pop());
