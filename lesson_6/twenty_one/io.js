@@ -28,12 +28,9 @@ function displayWinner(winner) {
   }
 }
 
-function displayPlayAgain() {
+function playAgain() {
   prompt('-------------------');
   prompt(messages.playAgain);
-}
-
-function playAgain() {
   while (true) {
     const response = readline.question().trim().toLowerCase();
     if (response === 'y') return true;
@@ -72,7 +69,6 @@ module.exports = {
   displayWelcome,
   retrieveHitOrStay,
   displayWinner,
-  displayPlayAgain,
   playAgain,
   displayPlayersCards,
   displayScore,

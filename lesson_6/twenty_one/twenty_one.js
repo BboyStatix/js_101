@@ -4,7 +4,6 @@ const { prompt } = require('./utils');
 const {
   retrieveHitOrStay,
   displayWinner,
-  displayPlayAgain,
   playAgain,
   displayPlayersCards,
   displayWelcome,
@@ -84,6 +83,5 @@ while (true) {
 
   displayGrandWinner(grandWinner(score));
 
-  displayPlayAgain();
   if (!playAgain()) break;
 }
